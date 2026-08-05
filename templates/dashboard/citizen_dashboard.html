@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Citizen Dashboard</h2>
+
+<p>Welcome {{ request.user.full_name }}</p>
+
+<a href="/submit/" class="btn btn-primary">
+    Submit Complaint
+</a>
+
+<a href="/my/" class="btn btn-success">
+    My Complaints
+</a>
+
+{% endblock %}

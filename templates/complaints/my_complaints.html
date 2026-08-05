@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">
+    <i class="bi bi-list-check"></i> My Complaints
+</h2>
+
+<div class="card shadow">
+
+    <div class="card-body">
+
+        <table class="table table-hover align-middle">
+
+            <thead class="table-dark">
+
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Priority</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+            {% for complaint in complaints %}
+
+                <tr>
+
+                    <td>{{ complaint.id }}</td>
+
+                    <td>
+
+                        <a href="{% url 'complaint_detail' complaint.id %}" class="text-decoration-none fw-semibold">
+
+                            {{ complaint.title }}
+
+                        </a>
+
+                    </td>
+
+                    <td>{{ complaint.category }}</td>
+
+                    <td>
+
+                        {% if complaint.status == "Submitted" %}
+
+                            <span class="badge bg-warning text-dark">
+                                Submitted
+                            </span>
+
+                        {% elif complaint.status == "Under Review" %}
+
+                            <span class="badge bg-info">
+                                Under Review
+                            </span>
+
+                        {% elif complaint.status == "Resolved" %}
+
+                            <span class="badge bg-success">
+                                Resolved
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge bg-danger">
+                                Rejected
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+
+                        {% if complaint.priority == "Low" %}
+
+                            <span class="badge bg-success">
+                                Low
+                            </span>
+
+                        {% elif complaint.priority == "Medium" %}
+
+                            <span class="badge bg-warning text-dark">
+                                Medium
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge bg-danger">
+                                High
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+            {% empty %}
+
+                <tr>
+
+                    <td colspan="5" class="text-center text-muted">
+
+                        No complaints found.
+
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">🚧 MIDSS-AI Dashboard</h2>
+
+<div class="row">
+
+    <div class="col-md-3">
+        <div class="card text-center shadow">
+            <div class="card-body">
+                <h3>{{ total }}</h3>
+                <p>Total Complaints</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card text-center shadow">
+            <div class="card-body">
+                <h3>{{ pending }}</h3>
+                <p>Pending</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card text-center shadow">
+            <div class="card-body">
+                <h3>{{ resolved }}</h3>
+                <p>Resolved</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card text-center shadow">
+            <div class="card-body">
+                <h3>{{ high }}</h3>
+                <p>High Priority</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

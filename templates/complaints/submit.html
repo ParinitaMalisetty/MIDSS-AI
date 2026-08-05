@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<div class="card shadow">
+
+<div class="card-header bg-primary text-white">
+
+<h3>Report Infrastructure Issue</h3>
+
+</div>
+
+<div class="card-body">
+
+<form method="POST" enctype="multipart/form-data">
+
+{% csrf_token %}
+
+{{ form.as_p }}
+
+<button class="btn btn-success">
+Submit Complaint
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+if (navigator.geolocation){
+
+navigator.geolocation.getCurrentPosition(function(position){
+
+document.getElementById("id_latitude").value =
+position.coords.latitude;
+
+document.getElementById("id_longitude").value =
+position.coords.longitude;
+
+});
+
+}
+
+</script>
+
+{% endblock %}

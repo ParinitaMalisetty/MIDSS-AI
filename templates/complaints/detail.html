@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row">
+
+    <!-- Left Column -->
+    <div class="col-lg-8">
+
+        <div class="card shadow mb-4">
+
+            <div class="card-header bg-primary text-white">
+
+                <h3 class="mb-0">
+                    {{ complaint.title }}
+                </h3>
+
+            </div>
+
+            <div class="card-body">
+
+                <h5>Description</h5>
+
+                <p>{{ complaint.description }}</p>
+
+                <hr>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        <p><strong>Category</strong></p>
+                        <p>{{ complaint.category }}</p>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <p><strong>Status</strong></p>
+
+                        {% if complaint.status == "Submitted" %}
+                            <span class="badge bg-warning text-dark">Submitted</span>
+
+                        {% elif complaint.status == "Under Review" %}
+                            <span class="badge bg-info">Under Review</span>
+
+                        {% elif complaint.status == "Resolved" %}
+                            <span class="badge bg-success">Resolved</span>
+
+                        {% else %}
+                            <span class="badge bg-danger">Rejected</span>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+                <div class="row mt-3">
+
+                    <div class="col-md-6">
+
+                        <p><strong>Priority</strong></p>
+
+                        {% if complaint.priority == "Low" %}
+                            <span class="badge bg-success">Low</span>
+
+                        {% elif complaint.priority == "Medium" %}
+                            <span class="badge bg-warning text-dark">Medium</span>
+
+                        {% else %}
+                            <span class="badge bg-danger">High</span>
+                        {% endif %}
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <p><strong>Coordinates</strong></p>
+
+                        {{ complaint.latitude }}<br>
+                        {{ complaint.longitude }}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% if complaint.image %}
+
+        <div class="card shadow">
+
+            <div class="card-header">
+
+                <h5 class="mb-0">
+                    Uploaded Image
+                </h5>
+
+            </div>
+
+            <div class="card-body text-center">
+
+                <img
+                    src="{{ complaint.image.url }}"
+                    class="img-fluid rounded shadow"
+                    style="max-height:450px; object-fit:contain;">
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+    <!-- Right Column -->
+
+    <div class="col-lg-4">
+
+        <div class="card shadow">
+
+            <div class="card-header bg-dark text-white">
+
+                <h5 class="mb-0">
+                    🤖 AI Analysis
+                </h5>
+
+            </div>
+
+            <div class="card-body">
+
+                <p>
+
+                    <strong>Prediction</strong><br>
+
+                    {{ complaint.ai_prediction|default:"Pending" }}
+
+                </p>
+
+                <hr>
+
+                <p>
+
+                    <strong>Confidence</strong><br>
+
+                    {{ complaint.confidence }}%
+
+                </p>
+
+                <hr>
+
+                <p>
+
+                    <strong>Severity</strong><br>
+
+                    {{ complaint.severity|default:"Pending" }}
+
+                </p>
+
+                <hr>
+
+                <p>
+
+                    <strong>Decision Support</strong>
+
+                </p>
+
+                <div class="border rounded p-3 bg-light">
+
+                    {{ complaint.decision_support|default:"Waiting for AI analysis..." }}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
